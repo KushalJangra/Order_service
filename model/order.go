@@ -19,7 +19,7 @@ const (
 
 var db *sql.DB
 
-// Initialize database connection
+
 func InitDB() {
 	dbConn := fmt.Sprintf("%s:%s@tcp(%s)/%s", DBUser, DBPass, DBHost, DBDbase)
 	var err error
@@ -36,7 +36,6 @@ func InitDB() {
 	log.Println("Database connected successfully")
 }
 
-// CloseDB closes the database connection
 func CloseDB() {
 	db.Close()
 }
@@ -50,7 +49,7 @@ type Order struct {
 	OrderDate  string `json:"order_date,omitempty"`
 }
 
-// CreateOrder inserts a new order into the database
+
 func CreateOrder(order Order) (int, error) {
 	query := `INSERT INTO orders (customer_id, product_id, quantity, order_date) VALUES (?, ?, ?, ?)`
 	result, err := db.Exec(query, order.CustomerID, order.ProductID, order.Quantity, order.OrderDate)
